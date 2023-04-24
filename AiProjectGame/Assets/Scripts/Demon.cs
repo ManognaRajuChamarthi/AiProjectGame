@@ -7,11 +7,13 @@ public class Demon : MonoBehaviour
 
     public int hitPoints;
     public float moveSpeed;
-    public GameObject player;
+    public GameObject playerPre;
 
     private Animator myAnimator;
     private AudioSource hitSound;
     private AudioClip deathSound;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +24,13 @@ public class Demon : MonoBehaviour
 
         deathSound = Resources.Load<AudioClip>("Audio/DemonWail");
 
-        player = GameObject.FindWithTag("Player");
+        playerPre = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, playerPre.transform.position, moveSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,5 +53,6 @@ public class Demon : MonoBehaviour
     void Destroy()
     {
         Destroy(gameObject);
+        playerPre.GetComponent<PlayerController>().kills++;
     }
 }

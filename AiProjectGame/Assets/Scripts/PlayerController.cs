@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 rightStickInput;    // Current (X,Y) input of the right stick on the game controller
     private bool canShoot;              // True when the player is able to fire a shot
 
+    public int health;
+    public int deaths;
+    public int kills;
+    
    
     void Start()
     {
@@ -104,5 +108,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Demon")
+        {
+            health--;
+
+            if (health <= 0)
+            {
+                deaths++;
+                health = 10;
+            }
+        }
+    }
+
+
 }

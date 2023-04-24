@@ -14,29 +14,40 @@ public class DemonSpawner : MonoBehaviour
 
     [HeaderAttribute("Call Function Settings")]
     public float startTime;
-    public float timeDelay;
+    public float timeDelay = 2f ;
 
     //converting strings to variables
-    private string Spawnfunction = "SpawnFunction";
+    //private string Spawnfunction = "SpawnFunction";
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnSoundSourse = gameObject.GetComponent<AudioSource>();
-        InvokeRepeating(Spawnfunction, startTime, timeDelay);
+        //spawnSoundSourse = gameObject.GetComponent<AudioSource>();
+        //InvokeRepeating(Spawnfunction, startTime, timeDelay);
+        StartCoroutine("SpawnPrefabWithDelay");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //_timeDelayforDemons = DDA.timeDelay;
+        spawnPosition.y = Random.Range(-3, 3);
     }
 
-    void SpawnFunction()
+   /* void SpawnFunction()
     {
         Instantiate(objectToBeSpawned, spawnPosition, spawnRotation);
 
         spawnSoundSourse.clip = spawnSound;
         spawnSoundSourse.Play();
+    }*/
+
+    IEnumerator SpawnPrefabWithDelay()
+    {
+        while (true)
+        {
+            Instantiate(objectToBeSpawned, spawnPosition, spawnRotation);
+            yield return new WaitForSecondsRealtime(timeDelay);
+        }
     }
 }
