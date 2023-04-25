@@ -31,7 +31,8 @@ public class DemonSpawner : MonoBehaviour
     void Update()
     {
         //_timeDelayforDemons = DDA.timeDelay;
-        spawnPosition.y = Random.Range(-3, 3);
+        spawnPosition.y = Random.Range(-5, 5);
+        spawnPosition.x = Random.Range(-5, 5);
     }
 
    /* void SpawnFunction()
